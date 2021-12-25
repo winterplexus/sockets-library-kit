@@ -4,7 +4,7 @@
 //  sockets kit - sockets interface class
 //  -------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #ifndef __SOCKETS_H
 #define __SOCKETS_H
@@ -15,7 +15,7 @@
 //  Sockets interface class.
 //
 class SocketsInterface {
-    public:
+public:
         SocketsInterface(void);
        ~SocketsInterface(void);
         SOCKET CreateSocket(void);
@@ -27,7 +27,7 @@ class SocketsInterface {
         int ReceiveRequest(const SOCKET, char *, const int);
         void CloseSocket(SOCKET);
 
-    private:
+private:
         WSADATA wsa_data;
 };
 

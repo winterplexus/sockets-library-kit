@@ -4,7 +4,7 @@
 //  sockets kit - portable functions namespace
 //  ------------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #include <stdarg.h>
 #include <stdio.h>

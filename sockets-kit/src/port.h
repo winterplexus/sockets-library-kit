@@ -4,7 +4,7 @@
 //  sockets kit - portable functions namespace
 //  ------------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #ifndef __PORTABLE_H
 #define __PORTABLE_H
@@ -14,7 +14,7 @@
 //
 //  Portable functions namespace.
 //
-namespace Portable
+namespace Portable 
 {
     int StringFormat(char *, size_t, const char *, ...);
     int Time(time_t *);

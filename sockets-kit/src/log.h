@@ -4,7 +4,7 @@
 //  sockets kit - log file class
 //  ----------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #ifndef __LOG_H
 #define __LOG_H
@@ -16,11 +16,10 @@
 //  Log class.
 //
 class Log {
-    public:
+public:
         Log(void);
         Log(const std::string& file_name);
         Log(Log const&);
-        Log& operator = (Log const&);
        ~Log(void);
         void SetFileName(const std::string&);
         void SetDateTimeFormat(const std::string&);
@@ -31,13 +30,13 @@ class Log {
         void WriteErrorLog(const std::string&);
         void WriteFatalLog(const std::string&);
 
-    private:
+private:
         void WriteEntryToLogFile(const std::string&);
         std::string GetSystemDate();
         std::string GetSystemDateTime();
         void WriteRuntimeErrorToLogFile(const std::string&);
 
-    private:
+private:
         std::string log_file_name;
         std::string log_date_time_format;
         CRITICAL_SECTION log_critical_section;

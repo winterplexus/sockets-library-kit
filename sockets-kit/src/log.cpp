@@ -4,7 +4,7 @@
 //  sockets kit - log file class
 //  ----------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #include <fstream>
 #include <iostream>
@@ -35,6 +35,17 @@ Log::Log(const std::string& file_name)
 {
     log_file_name = file_name;
     log_date_time_format = std::string("%Y-%m-%d %H:%M:%S");
+
+    InitializeCriticalSection(&log_critical_section);
+}
+
+//
+//  Copy constructior for log file object using a log object.
+//
+Log::Log(Log const &log)
+{
+    log_file_name = std::string(log.log_file_name);
+    log_date_time_format = std::string(log.log_date_time_format);
 
     InitializeCriticalSection(&log_critical_section);
 }

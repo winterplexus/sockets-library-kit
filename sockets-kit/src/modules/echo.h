@@ -4,7 +4,7 @@
 //  sockets kit - echo service namespace
 //  ------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #ifndef __ECHO_SERVICE_H
 #define __ECHO_SERVICE_H
@@ -14,7 +14,7 @@
 //
 //  Echo service namespace.
 //
-namespace EchoService
+namespace EchoService 
 {
     void HandleRequest(THREAD_ARGUMENTS *);
 

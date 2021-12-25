@@ -4,7 +4,7 @@
 //  sockets kit - console application class
 //  ---------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>

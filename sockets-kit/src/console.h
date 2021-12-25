@@ -4,7 +4,7 @@
 //  sockets kit - console application class
 //  ---------------------------------------
 //
-//  copyright 2014-2015 Software Constructions (SC)
+//  copyright 2014-2017 Code Construct Systems (CCS)
 //
 #ifndef __CONSOLE_APPLICATION_H
 #define __CONSOLE_APPLICATION_H
@@ -22,19 +22,19 @@ const int DefaultThreadLimit = 32767;
 //  Console application class.
 //
 class ConsoleApplication {
-    public:
+public:
         ConsoleApplication();
         bool ProcessOptions(int, char **);
         void ProcessServerRequests(void);
 
-    private:
+private:
         void WriteFatalLogMessage(const std::string&);
         void DisplayOptionsUsage(void);
         void DisplayInvalidOptionMessage(const std::string&);
         void DisplayInvalidOptionArgumentMessage(const std::string&);
         void DisplayVersion(void);
 
-    private:
+private:
         int port;
         int pending_connections;
         std::string log_file_path;
