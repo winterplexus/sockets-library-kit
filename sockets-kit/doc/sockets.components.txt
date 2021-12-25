@@ -1,0 +1,40 @@
+
+ ===============================================================================
+ =                                                                             =
+ = Sockets Kit Components                                                      =
+ =                                                                             =
+ ===============================================================================
+
+ v1.10
+
+ Client Application
+ ===============================================================================
+
+ Class/Namespace                       Source File          Include File
+ ------------------------------------- -------------------- --------------------
+ ClientApplication                     client.cpp           client.h
+ SocketsInterface                      sockets.cpp          sockets.h
+
+ Server - Console Application
+ ===============================================================================
+
+ Class/Namespace                       Source File          Include File
+ ------------------------------------- -------------------- --------------------
+ ConsoleApplication                    console.cpp          console.h
+ Server                                server.cpp           server.h
+ SocketsInterface                      sockets.cpp          sockets.h
+ Log                                   log.cpp              log.h
+ Portable                              port.cpp             port.h
+ EchoService                           modules/echo.cpp     modules/echo.h
+
+ Server - Service Application
+ ===============================================================================
+
+ Class/Namespace                       Source File          Include File
+ ------------------------------------- -------------------- --------------------
+ WindowsService                        service.cpp          service.h
+ Server                                server.cpp           server.h
+ SocketsInterface                      sockets.cpp          sockets.h
+ Log                                   log.cpp              log.h
+ Portable                              port.cpp             port.h
+ EchoService                           modules/echo.cpp     modules/echo.h

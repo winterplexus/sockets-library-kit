@@ -1,19 +1,19 @@
-/*
-**  @(#)port.h
-**
-**  sockets kit - portable functions namespace
-**  ------------------------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)port.h
+//
+//  sockets kit - portable functions namespace
+//  ------------------------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #ifndef __PORTABLE_H
 #define __PORTABLE_H
 
 #include <time.h>
 
-/*
-**  Portable functions namespace.
-*/
+//
+//  Portable functions namespace.
+//
 namespace Portable
 {
     int StringFormat(char *, size_t, const char *, ...);
@@ -23,4 +23,4 @@ namespace Portable
     int FormatTime(char *, size_t, const char *, struct tm *);
 };
 
-#endif /* __PORTABLE_H */
+#endif // __PORTABLE_H

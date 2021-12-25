@@ -1,26 +1,26 @@
-/*
-**  @(#)console.h
-**
-**  sockets kit - console application class
-**  ---------------------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)console.h
+//
+//  sockets kit - console application class
+//  ---------------------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #ifndef __CONSOLE_APPLICATION_H
 #define __CONSOLE_APPLICATION_H
 
 #include <string>
 
-/*
-**  Default port, pending connections limit and thread limit.
-*/
+//
+//  Default server console application parameters.
+//
 const int DefaultPort = 16000;
 const int DefaultPendingConnectionsLimit = 16;
 const int DefaultThreadLimit = 32767;
 
-/*
-**  Console application class.
-*/
+//
+//  Console application class.
+//
 class ConsoleApplication {
     public:
         ConsoleApplication();
@@ -28,17 +28,17 @@ class ConsoleApplication {
         void ProcessServerRequests(void);
 
     private:
-        int port;
-        int pending_connections;
-        std::string log_file_path;
-        bool trace_mode;
-
-    private:
         void WriteFatalLogMessage(const std::string&);
         void DisplayOptionsUsage(void);
         void DisplayInvalidOptionMessage(const std::string&);
         void DisplayInvalidOptionArgumentMessage(const std::string&);
         void DisplayVersion(void);
+
+    private:
+        int port;
+        int pending_connections;
+        std::string log_file_path;
+        bool trace_mode;
 };
 
-#endif /* __CONSOLE_APPLICATION_H */
+#endif // __CONSOLE_APPLICATION_H

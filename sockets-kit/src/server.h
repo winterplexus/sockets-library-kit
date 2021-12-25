@@ -1,36 +1,44 @@
-/*
-**  @(#)server.h
-**
-**  sockets kit - server class
-**  --------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)server.h
+//
+//  sockets kit - server class
+//  --------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #ifndef __SERVER_H
 #define __SERVER_H
 
 #include <string>
+#include "log.h"
 #include "sockets.h"
 
-/*
-**  Server class.
-*/
+//
+//  Thread arguments structure and type.
+//
+typedef struct ThreadArguments {
+    SocketsInterface *ta_sockets;
+    SOCKET            ta_client_socket;
+    Log              *ta_server_log;
+    bool              ta_server_log_trace_mode;
+} THREAD_ARGUMENTS;
+
+//
+//  Server class.
+//
 class Server {
     public:
         Server(const int, const int, const std::string&, const bool);
-       ~Server();
+       ~Server(void);
         void ServerRequests(void);
 
     private:
-        SocketsInterface *sockets;
         int port;
         int pending_connections;
         std::string log_file_path;
         bool trace_mode;
-
-    private:
-        void WriteFatalLogMessage(const std::string&);
-        void WriteTraceLogMessage(const std::string&);
+        SocketsInterface *sockets;
+        Log *server_log;
 };
 
-#endif /* __SERVER_H */
+#endif // __SERVER_H

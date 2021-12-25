@@ -1,23 +1,23 @@
-/*
-**  @(#)sockets.cpp
-**
-**  sockets kit - sockets interface class
-**  -------------------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)sockets.h
+//
+//  sockets kit - sockets interface class
+//  -------------------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #ifndef __SOCKETS_H
 #define __SOCKETS_H
 
 #include <winsock.h>
 
-/*
-**  Sockets interface class.
-*/
+//
+//  Sockets interface class.
+//
 class SocketsInterface {
     public:
-        SocketsInterface();
-       ~SocketsInterface();
+        SocketsInterface(void);
+       ~SocketsInterface(void);
         SOCKET CreateSocket(void);
         SOCKET BindSocket(SOCKET, const int);
         SOCKET ListenConnections(SOCKET, int);
@@ -31,4 +31,4 @@ class SocketsInterface {
         WSADATA wsa_data;
 };
 
-#endif /* __SOCKETS_H */
+#endif // __SOCKETS_H

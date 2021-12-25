@@ -1,27 +1,27 @@
-/*
-**  @(#)log.h
-**
-**  sockets kit - log file class
-**  ----------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)log.h
+//
+//  sockets kit - log file class
+//  ----------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #ifndef __LOG_H
 #define __LOG_H
 
 #include <windows.h>
 #include <string>
 
-/*
-**  Log class.
-*/
+//
+//  Log class.
+//
 class Log {
     public:
-        Log();
+        Log(void);
         Log(const std::string& file_name);
         Log(Log const&);
         Log& operator = (Log const&);
-       ~Log();
+       ~Log(void);
         void SetFileName(const std::string&);
         void SetDateTimeFormat(const std::string&);
         void WriteTraceLog(const std::string&);
@@ -32,15 +32,15 @@ class Log {
         void WriteFatalLog(const std::string&);
 
     private:
-        std::string log_file_name;
-        std::string log_date_time_format;
-        CRITICAL_SECTION log_critical_section;
-
-    private:
         void WriteEntryToLogFile(const std::string&);
         std::string GetSystemDate();
         std::string GetSystemDateTime();
         void WriteRuntimeErrorToLogFile(const std::string&);
+
+    private:
+        std::string log_file_name;
+        std::string log_date_time_format;
+        CRITICAL_SECTION log_critical_section;
 };
 
-#endif /* __LOG_H */
+#endif // __LOG_H

@@ -1,11 +1,11 @@
-/*
-**  @(#)port.cpp
-**
-**  sockets kit - portable functions namespace
-**  ------------------------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)port.cpp
+//
+//  sockets kit - portable functions namespace
+//  ------------------------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,19 +13,19 @@
 #include <time.h>
 #include "port.h"
 
-/*
-**  Local function prototypes.
-*/
+//
+//  Local function prototypes.
+//
 static int strcpy_p(char *, size_t, const char *, size_t);
 
-/*
-**  Portable functions namespace.
-*/
+//
+//  Portable functions namespace.
+//
 namespace Portable
 {
-    /*
-    **  String format.
-    */
+    //
+    //  String format.
+    //
     int Portable::StringFormat(char *destination, size_t destination_size, const char *format, ...)
     {
         va_list varg;
@@ -42,9 +42,9 @@ namespace Portable
         return (rc);
     }
 
-    /*
-    **  Get system time.
-    */
+    //
+    //  Get system time.
+    //
     int Portable::Time(time_t *timer)
     {
         time(timer);
@@ -52,9 +52,9 @@ namespace Portable
         return (EXIT_SUCCESS);
     }
 
-    /*
-    **  Convert time as local time.
-    */
+    //
+    //  Convert time as local time.
+    //
     int Portable::LocalTime(time_t *timer, struct tm *time)
     {
 #ifdef _SCL
@@ -76,9 +76,9 @@ namespace Portable
 #endif
     }
 
-    /*
-    **  Convert time as a character string.
-    */
+    //
+    //  Convert time as a character string.
+    //
     int Portable::StringTime(char *destination, size_t destination_size, struct tm *time)
     {
 #ifdef _SCL
@@ -90,17 +90,17 @@ namespace Portable
 #endif
     }
 
-    /*
-    **  Format a time string.
-    */
+    //
+    //  Format a time string.
+    //
     int Portable::FormatTime(char *destination, size_t destination_size, const char *format, struct tm *time)
     {
         return (strftime(destination, destination_size, format, time));
     }
 
-    /*
-    **  String copy.
-    */
+    //
+    //  String copy.
+    //
     static int strcpy_p(char *destination, size_t destination_size, const char *source, size_t count)
     {
 #ifdef _SCL

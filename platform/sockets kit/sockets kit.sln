@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{6CBCDEFC-06E0-42CE-BD38-84C812DEB455}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\sockets kit\doc\sockets.components.txt = ..\..\sockets kit\doc\sockets.components.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "client.vcxproj", "{A1D5826D-449C-4198-9F52-168B087655B1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server-console", "server-console.vcxproj", "{BA1CAA07-7A83-4368-9522-A564A4E12891}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1D5826D-449C-4198-9F52-168B087655B1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A1D5826D-449C-4198-9F52-168B087655B1}.Debug|Win32.Build.0 = Debug|Win32
+		{A1D5826D-449C-4198-9F52-168B087655B1}.Release|Win32.ActiveCfg = Release|Win32
+		{A1D5826D-449C-4198-9F52-168B087655B1}.Release|Win32.Build.0 = Release|Win32
+		{BA1CAA07-7A83-4368-9522-A564A4E12891}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BA1CAA07-7A83-4368-9522-A564A4E12891}.Debug|Win32.Build.0 = Debug|Win32
+		{BA1CAA07-7A83-4368-9522-A564A4E12891}.Release|Win32.ActiveCfg = Release|Win32
+		{BA1CAA07-7A83-4368-9522-A564A4E12891}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

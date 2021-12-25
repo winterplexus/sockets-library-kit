@@ -1,42 +1,42 @@
-/*
-**  @(#)client.cpp
-**
-**  sockets kit - client application class
-**  --------------------------------------
-**
-**  copyright 2014 E. Spangler
-*/
+//
+//  @(#)client.cpp
+//
+//  sockets kit - client application class
+//  --------------------------------------
+//
+//  copyright 2014-2015 Software Constructions (SC)
+//
 #include <iostream>
 #include <string>
 #include "client.h"
 #include "sockets.h"
 #include "version.h"
 
-/*
-**  Console application.
-*/
+//
+//  Client application.
+//
 int main(int argc, char **argv)
 {
     ClientApplication application;
     if (application.ProcessOptions(argc, argv)) {
-        application.ProcessClientRequests();
+        application.ProcessClientRequest();
     }
     return (0);
 }
 
-/*
-**  Class constructor for client application.
-*/
-ClientApplication::ClientApplication()
+//
+//  Class constructor for client application.
+//
+ClientApplication::ClientApplication(void)
 {
     host_address = std::string("");
     port = 0;
     data = std::string("");
 }
 
-/*
-**  Process options.
-*/
+//
+//  Process options.
+//
 bool ClientApplication::ProcessOptions(int argc, char **argv)
 {
     int i;
@@ -88,16 +88,21 @@ bool ClientApplication::ProcessOptions(int argc, char **argv)
     return (true);
 }
 
-/*
-**  Process client requests.
-*/
-void ClientApplication::ProcessClientRequests(void)
+//
+//  Process client request.
+//
+void ClientApplication::ProcessClientRequest(void)
 {
     SocketsInterface sockets;
-    char buffer[DefaultBufferSize];
+    char *buffer;
+    int buffer_size = data.size();
 
-    memset(buffer, 0, DefaultBufferSize);
-    memcpy(buffer, data.c_str(), data.size());
+    if ((buffer = (char *)malloc(buffer_size + 1)) == NULL) {
+        DisplayErrorMessage(std::string("insufficient memory to allocating client request buffer"));
+        return;
+    }
+
+    memset(buffer, 0, buffer_size + 1);
 
     try {
         SOCKET client_socket = sockets.CreateSocket();
@@ -105,58 +110,76 @@ void ClientApplication::ProcessClientRequests(void)
         sockets.ConnectServer(client_socket, host_address, port);
         std::cout << "connecting to " << host_address << " at port " << port << std::endl;
 
-        sockets.SendRequest(client_socket, buffer, DefaultBufferSize);
-        std::cout << "data sent     : " << buffer << std::endl;
+        int bytes_sent = sockets.SendRequest(client_socket, data.c_str(), data.size());
+        std::cout << data << std::endl;
 
-        sockets.ReceiveRequest(client_socket, buffer, DefaultBufferSize);
-        std::cout << "data received : " << buffer << std::endl;
+        int total_bytes_received = 0;
+        while (total_bytes_received < bytes_sent) {
+            int bytes_received = sockets.ReceiveRequest(client_socket, buffer, buffer_size);
+            if (bytes_received < 0) {
+                break;
+            }
+            std::cout << std::string(buffer);
+            total_bytes_received += bytes_received;
+            memset(buffer, 0, buffer_size + 1);
+        }
+
+        std::cout << std::endl;
 
         sockets.CloseSocket(client_socket);
     }
-    catch (std::string& s) {
-        std::cout << "error-> " << s << std::endl;
-    }
     catch (std::exception& e) {
-        std::cout << "error-> " << std::string(e.what()) << std::endl;
+        DisplayErrorMessage(std::string(e.what()));
     }
+
+    free(buffer);
 }
 
-/*
-**  Display options usage.
-*/
+//
+//  Display options usage.
+//
 void ClientApplication::DisplayOptionsUsage(void)
 {
     std::cout << "usage: client -d [data] -h [host address] -p [port] -v" << std::endl << std::endl;
 }
 
-/*
-**  Display missing option.
-*/
+//
+//  Display missing option.
+//
 void ClientApplication::DisplayMissingOption(const std::string& message)
 {
     std::cout << std::endl << "error-> " << message << " option is missing" << std::endl;
 }
 
-/*
-**  Display invalid option.
-*/
+//
+//  Display invalid option.
+//
 void ClientApplication::DisplayInvalidOptionMessage(const std::string& option)
 {
     std::cout << std::endl << "error-> invalid option: " << option << std::endl;
 }
 
-/*
-**  Display invalid options argument.
-*/
+//
+//  Display invalid options argument.
+//
 void ClientApplication::DisplayInvalidOptionArgumentMessage(const std::string& argument)
 {
     std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
-/*
-**  Display version.
-*/
+//
+//  Display error message.
+//
+void ClientApplication::DisplayErrorMessage(const std::string& message)
+{
+    std::cout << "error-> " << message << std::endl;
+}
+
+//
+//  Display version.
+//
 void ClientApplication::DisplayVersion(void)
 {
-    std::cout << VersionString << std::endl << std::endl;
+    std::cout << VersionString << std::endl;
+    std::cout << "client" << std::endl << std::endl;
 }
