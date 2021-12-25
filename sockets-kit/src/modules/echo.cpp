@@ -1,28 +1,21 @@
 //
-//  @(#)echo.cpp
+// @(#)echo.cpp
 //
-//  sockets kit - echo service namespace
-//  ------------------------------------
+// sockets kit - echo service
+// --------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+// copyright 2014-2020 Code Construct Systems (CCS)
 //
 #include <string>
 #include "echo.h"
 
-//
-//  Echo service namespace.
-//
-namespace EchoService
-{
-    //
-    //  Handle request.
-    //
-    void EchoService::HandleRequest(THREAD_ARGUMENTS *arguments)
-    {
+namespace EchoService {        
+
+    void EchoService::HandleRequest(THREAD_ARGUMENTS *arguments) {
         char buffer[EchoBufferSize];
         int size;
 
-        if ((size = arguments->ta_sockets->ReceiveRequest(arguments->ta_client_socket, buffer, EchoBufferSize)) < 0) {
+        if ((size = arguments->ta_sockets->ReceiveResponse(arguments->ta_client_socket, buffer, EchoBufferSize)) < 0) {
             arguments->ta_sockets->CloseSocket(arguments->ta_client_socket);
             return;
         }
@@ -32,7 +25,7 @@ namespace EchoService
             arguments->ta_server_log->WriteTraceLog(trace_message);
         }
 
-        while (size > 1) {
+        while (size >= 1) {
             if (arguments->ta_sockets->SendRequest(arguments->ta_client_socket, buffer, size) != size) {
                 arguments->ta_sockets->CloseSocket(arguments->ta_client_socket);
                 return;
@@ -43,7 +36,7 @@ namespace EchoService
                 arguments->ta_server_log->WriteTraceLog(trace_message);
             }
 
-            if ((size = arguments->ta_sockets->ReceiveRequest(arguments->ta_client_socket, buffer, EchoBufferSize)) < 0) {
+            if ((size = arguments->ta_sockets->ReceiveResponse(arguments->ta_client_socket, buffer, EchoBufferSize)) < 0) {
                 break;
             }
 

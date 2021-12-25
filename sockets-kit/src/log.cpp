@@ -1,11 +1,13 @@
 //
 //  @(#)log.cpp
 //
-//  sockets kit - log file class
-//  ----------------------------
+//  sockets kit - log file
+//  ----------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
+#define WIN32_LEAN_AND_MEAN
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -15,130 +17,80 @@
 #include "log.h"
 #include "port.h"
 
-//
-//  Log critical section (Windows thread synchronization).
-//
+static std::string log_file_name;
+static std::string log_date_time_format;
+
 CRITICAL_SECTION log_critical_section;
 
-//
-//  Class constructor for log file object.
-//
-Log::Log(void)
-{
+LogFile::LogFile(void) {
+    InitializeCriticalSection(&log_critical_section);
+
     log_file_name = std::string("log");
 }
 
-//
-//  Class constructor for log file object using a given file name.
-//
-Log::Log(const std::string& file_name)
-{
+LogFile::LogFile(const std::string &file_name) {
+    InitializeCriticalSection(&log_critical_section);
+
     log_file_name = file_name;
     log_date_time_format = std::string("%Y-%m-%d %H:%M:%S");
-
-    InitializeCriticalSection(&log_critical_section);
 }
 
-//
-//  Copy constructior for log file object using a log object.
-//
-Log::Log(Log const &log)
-{
-    log_file_name = std::string(log.log_file_name);
-    log_date_time_format = std::string(log.log_date_time_format);
-
+LogFile::LogFile(LogFile const &log) {
     InitializeCriticalSection(&log_critical_section);
+
+    log_file_name = std::string(log_file_name);
+    log_date_time_format = std::string(log_date_time_format);
 }
 
-//
-//  Class destructor for log file object.
-//
-Log::~Log(void)
-{
+LogFile::~LogFile(void) {
     DeleteCriticalSection(&log_critical_section);
 }
 
-//
-//  Set log file name base.
-//
-void Log::SetFileName(const std::string& file_name)
-{
+void LogFile::SetFileName(const std::string &file_name) {
     log_file_name = file_name;
 }
 
-//
-//  Set date and time format specification.
-//
-void Log::SetDateTimeFormat(const std::string& date_time_format)
-{
+void LogFile::SetDateTimeFormat(const std::string &date_time_format) {
     log_date_time_format = std::string(date_time_format);
 }
 
-//
-//  Write trace log message.
-//
-void Log::WriteTraceLog(const std::string& trace_message)
-{
+void LogFile::WriteTraceLog(const std::string &trace_message) {
     std::string entry = std::string(GetSystemDateTime() + " *TRACE: " + trace_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//  Write debug log message.
-//
-void Log::WriteDebugLog(const std::string& debug_message)
-{
+void LogFile::WriteDebugLog(const std::string &debug_message) {
     std::string entry = std::string(GetSystemDateTime() + " *DEBUG: " + debug_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//  Write information log message.
-//
-void Log::WriteInformationLog(const std::string& information_message)
-{
+void LogFile::WriteInformationLog(const std::string &information_message) {
     std::string entry = std::string(GetSystemDateTime() + " *INFORMATION: " + information_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//  Write warning log message.
-//
-void Log::WriteWarningLog(const std::string& warning_message)
-{
+void LogFile::WriteWarningLog(const std::string &warning_message) {
     std::string entry = std::string(GetSystemDateTime() + " *WARNING: " + warning_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//  Write error log message.
-//
-void Log::WriteErrorLog(const std::string& error_message)
-{
+void LogFile::WriteErrorLog(const std::string &error_message) {
     std::string entry = std::string(GetSystemDateTime() + " *ERROR: " + error_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//   Write fatal log message.
-//
-void Log::WriteFatalLog(const std::string& fatal_message)
-{
+void LogFile::WriteFatalLog(const std::string &fatal_message) {
     std::string entry = std::string(GetSystemDateTime() + " *FATAL: " + fatal_message + "\n");
 
     WriteEntryToLogFile(entry);
 }
 
-//
-//  Write entry to log file.
-//
-void Log::WriteEntryToLogFile(const std::string& entry)
-{
+void LogFile::WriteEntryToLogFile(const std::string &entry) {
     EnterCriticalSection(&log_critical_section);
 
     std::string log_fname = std::string(std::string(log_file_name) + "." + GetSystemDate() + ".log");
@@ -156,11 +108,7 @@ void Log::WriteEntryToLogFile(const std::string& entry)
     LeaveCriticalSection(&log_critical_section);
 }
 
-//
-//  Get current system date only.
-//
-std::string Log::GetSystemDate()
-{
+std::string LogFile::GetSystemDate() {
     time_t rawtime;
     struct tm tms;
     char buffer[32];
@@ -170,7 +118,7 @@ std::string Log::GetSystemDate()
 
     memset(buffer, 0, sizeof(buffer));
     if (Portable::FormatTime(buffer, sizeof(buffer), "%Y-%m-%d", &tms) == EXIT_FAILURE) {
-        std::string runtime_error = std::string("error-> Portable::FormatTime() failed: error number(" + std::to_string(errno) + "\n");
+        std::string runtime_error = std::string("error-> Portable::FormatTime() failed: error number (" + std::to_string(errno) + "\n");
         WriteRuntimeErrorToLogFile(runtime_error);
     }
 
@@ -178,11 +126,7 @@ std::string Log::GetSystemDate()
     return (system_date);
 }
 
-//
-//  Get current system date and time.
-//
-std::string Log::GetSystemDateTime()
-{
+std::string LogFile::GetSystemDateTime() {
     time_t rawtime;
     struct tm tms;
     char buffer[32];
@@ -192,7 +136,7 @@ std::string Log::GetSystemDateTime()
 
     memset(buffer, 0, sizeof(buffer));
     if (Portable::FormatTime(buffer, sizeof(buffer), log_date_time_format.c_str(), &tms) == EXIT_FAILURE) {
-        std::string runtime_error = std::string("error-> Portable::FormatTime() failed: error number(" + std::to_string(errno) + ")\n");
+        std::string runtime_error = std::string("error-> Portable::FormatTime() failed: error number (" + std::to_string(errno) + ")\n");
         WriteRuntimeErrorToLogFile(runtime_error);
     }
 
@@ -200,11 +144,7 @@ std::string Log::GetSystemDateTime()
     return (system_date);
 }
 
-//
-//  Write runtime error to log file.
-//
-void Log::WriteRuntimeErrorToLogFile(const std::string& runtime_error)
-{
+void LogFile::WriteRuntimeErrorToLogFile(const std::string &runtime_error) {
     EnterCriticalSection(&log_critical_section);
 
     std::string log_fname = std::string(std::string(log_file_name) + std::string(".") + GetSystemDate() + ".log");

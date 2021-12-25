@@ -1,10 +1,10 @@
 //
 //  @(#)console.cpp
 //
-//  sockets kit - console application class
-//  ---------------------------------------
+//  sockets kit - console application
+//  ---------------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>
@@ -13,11 +13,7 @@
 #include "server.h"
 #include "version.h"
 
-//
-//  Console application.
-//
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     ConsoleApplication application;
     if (application.ProcessOptions(argc, argv)) {
         application.ProcessServerRequests();
@@ -25,21 +21,13 @@ int main(int argc, char **argv)
     return (0);
 }
 
-//
-//  Class constructor for console application.
-//
-ConsoleApplication::ConsoleApplication()
-{
+ConsoleApplication::ConsoleApplication() {
     port = DefaultPort;
     pending_connections = DefaultPendingConnectionsLimit;
     trace_mode = false;
 }
 
-//
-//  Process options.
-//
-bool ConsoleApplication::ProcessOptions(int argc, char **argv)
-{
+bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
     int i;
 
     if (argc == 1) {
@@ -83,59 +71,41 @@ bool ConsoleApplication::ProcessOptions(int argc, char **argv)
     return (true);
 }
 
-//
-//  Process server requests.
-//
-void ConsoleApplication::ProcessServerRequests(void)
-{
+void ConsoleApplication::ProcessServerRequests(void) {
     try {
         Server server = Server(port, pending_connections, log_file_path, trace_mode);
         server.ServerRequests();
     }
-    catch (std::exception& e) {
+    catch (std::exception &e) {
         std::string exception_message = std::string("error-> " + std::string(e.what()));
         WriteFatalLogMessage(exception_message);
     }
 }
 
-//
-//  Write fatal log message to log file.
-//
-void ConsoleApplication::WriteFatalLogMessage(const std::string& message)
-{
-    Log log = Log(log_file_path);
+void ConsoleApplication::WriteFatalLogMessage(const std::string &message) {
+    LogFile log = LogFile(log_file_path);
     log.WriteFatalLog(message);
 }
 
-//
-//  Display options usage.
-//
-void ConsoleApplication::DisplayOptionsUsage(void)
-{
-    std::cout << "usage : server-console -b [pending connections] -l [log file path] -p [port] -v - x" << std::endl << std::endl;
+void ConsoleApplication::DisplayOptionsUsage(void) {
+    std::cout << "usage: server-console.exe (options)" << std::endl << std::endl;
+    std::cout << "where (options) include:" << std::endl;
+    std::cout << "  -b  [pending connections backlog length]" << std::endl;
+    std::cout << "  -l  [log file path]" << std::endl;
+    std::cout << "  -p  [port number]" << std::endl;
+    std::cout << "  -v  display version" << std::endl;
+    std::cout << "  -x  enable trace mode" << std::endl;
 }
 
-//
-//  Display invalid option.
-//
-void ConsoleApplication::DisplayInvalidOptionMessage(const std::string& option)
-{
+void ConsoleApplication::DisplayInvalidOptionMessage(const std::string &option) {
     std::cout << std::endl << "error-> invalid option: " << option << std::endl;
 }
 
-//
-//  Display invalid options argument.
-//
-void ConsoleApplication::DisplayInvalidOptionArgumentMessage(const std::string& argument)
-{
+void ConsoleApplication::DisplayInvalidOptionArgumentMessage(const std::string &argument) {
     std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
-//
-//  Display version.
-//
-void ConsoleApplication::DisplayVersion(void)
-{
-    std::cout << VersionString << std::endl;
+void ConsoleApplication::DisplayVersion(void) {
+    std::cout << VersionRelease << std::endl;
     std::cout << "server-console" << std::endl << std::endl;
 }

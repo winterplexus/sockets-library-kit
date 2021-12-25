@@ -1,50 +1,36 @@
 //
 //  @(#)sockets.cpp
 //
-//  sockets kit - sockets interface class
-//  -------------------------------------
+//  sockets kit - sockets interface
+//  -------------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
 #include <string>
+#include <stdexcept>
 #include <winsock.h>
 #include "sockets.h"
 
-//
-//  Class constructor for sockets interface.
-//
-SocketsInterface::SocketsInterface(void)
-{
+SocketsInterface::SocketsInterface(void) {
     if (WSAStartup(MAKEWORD(2, 0), &wsa_data) != 0) {
         throw (std::runtime_error(std::string("WSAStartup() failed")));
     }
 }
 
-//
-//  Class destructor for sockets interface.
-//
-SocketsInterface::~SocketsInterface(void)
-{
+SocketsInterface::~SocketsInterface(void) {
     WSACleanup();
 }
 
-//
-//  Create a socket.
-//
-SOCKET SocketsInterface::CreateSocket(void)
-{
+SOCKET SocketsInterface::CreateSocket(void) {
     SOCKET client_socket;
+
     if ((client_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
         throw (std::runtime_error(std::string("socket() failed")));
     }
     return (client_socket);
 }
 
-//
-//  Connect to server using client socket, IP address and port number.
-//
-SOCKET SocketsInterface::ConnectServer(SOCKET client_socket, const std::string& host_address, const int port)
-{
+SOCKET SocketsInterface::ConnectServer(SOCKET client_socket, const std::string &host_address, const int port) {
     if (!port) {
         throw (std::runtime_error(std::string("invalid port number")));
     }
@@ -56,17 +42,13 @@ SOCKET SocketsInterface::ConnectServer(SOCKET client_socket, const std::string& 
     socket_address.sin_addr.s_addr = inet_addr(host_address.c_str());
     socket_address.sin_port = htons(port);
 
-    if (connect(client_socket, (struct sockaddr *)&socket_address, sizeof(socket_address)) < 0) {
+    if (connect(client_socket, (struct sockaddr *) & socket_address, sizeof(socket_address)) < 0) {
         throw (std::runtime_error(std::string("connect() failed")));
     }
     return (client_socket);
 }
 
-//
-//  Bind socket to local address using server socket and port number.
-//
-SOCKET SocketsInterface::BindSocket(SOCKET server_socket, const int port)
-{
+SOCKET SocketsInterface::BindSocket(SOCKET server_socket, const int port) {
     if (!port) {
         throw (std::runtime_error(std::string("invalid port number")));
     }
@@ -78,17 +60,13 @@ SOCKET SocketsInterface::BindSocket(SOCKET server_socket, const int port)
     socket_address.sin_addr.s_addr = htonl(INADDR_ANY);
     socket_address.sin_port = htons(port);
 
-    if (bind(server_socket, (struct sockaddr *)&socket_address, sizeof(socket_address)) < 0) {
+    if (bind(server_socket, (struct sockaddr *) & socket_address, sizeof(socket_address)) < 0) {
         throw (std::runtime_error(std::string("bind() failed")));
     }
     return (server_socket);
 }
 
-//
-//  Listen for connections using server socket and pending connections (limit).
-//
-SOCKET SocketsInterface::ListenConnections(SOCKET server_socket, int pending_connections)
-{
+SOCKET SocketsInterface::ListenConnections(SOCKET server_socket, int pending_connections) {
     if (pending_connections < 1) {
         pending_connections = SOMAXCONN;
     }
@@ -98,26 +76,19 @@ SOCKET SocketsInterface::ListenConnections(SOCKET server_socket, int pending_con
     return (server_socket);
 }
 
-//
-//  Accept a connection using server socket returning a client socket.
-//
-SOCKET SocketsInterface::AcceptConnections(const SOCKET server_socket)
-{
+SOCKET SocketsInterface::AcceptConnections(const SOCKET server_socket) {
     SOCKET client_socket;
+
     struct sockaddr_in client_address;
     int client_address_length = sizeof(client_address);
 
-    if ((client_socket = accept(server_socket, (struct sockaddr *)&client_address, &client_address_length)) < 0) {
+    if ((client_socket = accept(server_socket, (struct sockaddr *) & client_address, &client_address_length)) < 0) {
         throw (std::runtime_error(std::string("accept() failed")));
     }
     return client_socket;
 }
 
-//
-//  Send request using client socket, buffer and buffer size.
-//
-int SocketsInterface::SendRequest(const SOCKET client_socket, const char *buffer, const int buffer_size)
-{
+int SocketsInterface::SendRequest(const SOCKET client_socket, const char *buffer, const int buffer_size) {
     int send_size = 0;
 
     if (client_socket) {
@@ -126,11 +97,7 @@ int SocketsInterface::SendRequest(const SOCKET client_socket, const char *buffer
     return (send_size);
 }
 
-//
-//  Receive request using client socket, buffer and buffer size.
-//
-int SocketsInterface::ReceiveRequest(const SOCKET client_socket, char *buffer, const int buffer_size)
-{
+int SocketsInterface::ReceiveResponse(const SOCKET client_socket, char *buffer, const int buffer_size) {
     int receive_size = 0;
 
     if (client_socket) {
@@ -140,11 +107,7 @@ int SocketsInterface::ReceiveRequest(const SOCKET client_socket, char *buffer, c
     return (receive_size);
 }
 
-//
-//  Close socket.
-//
-void SocketsInterface::CloseSocket(SOCKET socket)
-{
+void SocketsInterface::CloseSocket(SOCKET socket) {
     if (socket) {
         closesocket(socket);
     }

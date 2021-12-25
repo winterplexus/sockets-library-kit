@@ -1,0 +1,34 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ //                                                                           //
+ // SOCKETS KIT COMPONENTS                                                    //
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+
+ v2.00
+
+ CLIENT APPLICATION
+ -------------------------------------------------------------------------------
+ CLASS / NAMESPACE              SOURCE FILE NAME         INCLUDE FILE NAME
+ ------------------------------ ------------------------ -----------------------
+ ClientApplication              client.cpp               client.h
+ SocketsInterface               sockets.cpp              sockets.h
+
+
+ SERVER - CONSOLE APPLICATION
+ -------------------------------------------------------------------------------
+ CLASS / NAMESPACE              SOURCE FILE NAME         INCLUDE FILE NAME
+ ------------------------------ ------------------------ ------------------------
+ ConsoleApplication             console.cpp              console.h
+ Server                         server.cpp               server.h
+ SocketsInterface               sockets.cpp              sockets.h
+ Portable                       port.cpp                 port.h
+ EchoService                    modules/echo.cpp         modules/echo.h
+
+
+ LOG FILE DLL (DYNAMIC LINK LIBRARY)
+ -------------------------------------------------------------------------------
+ CLASS / NAMESPACE              SOURCE FILE NAME         INCLUDE FILE NAME
+ ------------------------------ ------------------------ ------------------------
+ LogFile                        log.cpp                  log.h
+ Portable                       port.cpp                 port.h
+ DllMain                        windows/logdll.cpp

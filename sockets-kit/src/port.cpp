@@ -1,10 +1,10 @@
 //
 //  @(#)port.cpp
 //
-//  sockets kit - portable functions namespace
-//  ------------------------------------------
+//  sockets kit - portable functions
+//  --------------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
 #include <stdarg.h>
 #include <stdio.h>
@@ -13,26 +13,15 @@
 #include <time.h>
 #include "port.h"
 
-//
-//  Local function prototypes.
-//
-static int strcpy_p(char *, size_t, const char *, size_t);
+namespace Portable {
+    static int strcpy_p(char *, size_t, const char *, size_t);
 
-//
-//  Portable functions namespace.
-//
-namespace Portable
-{
-    //
-    //  String format.
-    //
-    int Portable::StringFormat(char *destination, size_t destination_size, const char *format, ...)
-    {
+    int Portable::StringFormat(char *destination, size_t destination_size, const char *format, ...) {
         va_list varg;
         int rc;
 
         va_start(varg, format);
-#ifdef _SCL
+#ifdef _SCL // secure C library
         rc = vsprintf_s(destination, destination_size, format, varg);
 #else
         rc = vsprintf(destination, format, varg);
@@ -42,22 +31,14 @@ namespace Portable
         return (rc);
     }
 
-    //
-    //  Get system time.
-    //
-    int Portable::Time(time_t *timer)
-    {
+    int Portable::Time(time_t *timer) {
         time(timer);
 
         return (EXIT_SUCCESS);
     }
 
-    //
-    //  Convert time as local time.
-    //
-    int Portable::LocalTime(time_t *timer, struct tm *time)
-    {
-#ifdef _SCL
+    int Portable::LocalTime(time_t *timer, struct tm *time) {
+#ifdef _SCL // secure C library
         return (localtime_s(time, timer));
 #else
         struct tm *local_time = localtime(timer);
@@ -76,12 +57,8 @@ namespace Portable
 #endif
     }
 
-    //
-    //  Convert time as a character string.
-    //
-    int Portable::StringTime(char *destination, size_t destination_size, struct tm *time)
-    {
-#ifdef _SCL
+    int Portable::StringTime(char *destination, size_t destination_size, struct tm *time) {
+#ifdef _SCL // secure C library
         return (asctime_s(destination, destination_size, time));
 #else
         char *ascii_time = asctime(time);
@@ -90,20 +67,12 @@ namespace Portable
 #endif
     }
 
-    //
-    //  Format a time string.
-    //
-    int Portable::FormatTime(char *destination, size_t destination_size, const char *format, struct tm *time)
-    {
+    int Portable::FormatTime(char *destination, size_t destination_size, const char *format, struct tm *time) {
         return (strftime(destination, destination_size, format, time));
     }
 
-    //
-    //  String copy.
-    //
-    static int strcpy_p(char *destination, size_t destination_size, const char *source, size_t count)
-    {
-#ifdef _SCL
+    static int strcpy_p(char *destination, size_t destination_size, const char *source, size_t count) {
+#ifdef _SCL // secure C library
         return (strncpy_s(destination, destination_size, source, count));
 #else
         return ((strncpy(destination, source, count) != NULL) ? EXIT_SUCCESS : EXIT_FAILURE);

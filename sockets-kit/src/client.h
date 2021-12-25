@@ -4,16 +4,13 @@
 //  sockets kit - client application class
 //  --------------------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
-#ifndef __CLIENT_APPLICATION_H
-#define __CLIENT_APPLICATION_H
+#ifndef __CLIENT_H
+#define __CLIENT_H
 
 #include <string>
 
-//
-//  Client application class.
-//
 class ClientApplication {
 public:
         ClientApplication(void);
@@ -22,10 +19,10 @@ public:
 
 private:
         void DisplayOptionsUsage(void);
-        void DisplayMissingOption(const std::string&);
-        void DisplayInvalidOptionMessage(const std::string&);
-        void DisplayInvalidOptionArgumentMessage(const std::string&);
-        void DisplayErrorMessage(const std::string&);
+        void DisplayMissingOption(const std::string &);
+        void DisplayInvalidOptionMessage(const std::string &);
+        void DisplayInvalidOptionArgumentMessage(const std::string &);
+        void DisplayErrorMessage(const std::string &);
         void DisplayVersion(void);
 
 private:
@@ -34,4 +31,4 @@ private:
         std::string data;
 };
 
-#endif // __CLIENT_APPLICATION_H
+#endif // __CLIENT_H

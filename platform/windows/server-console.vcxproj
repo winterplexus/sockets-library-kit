@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,39 +11,51 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\sockets kit\src\console.h" />
-    <ClInclude Include="..\..\sockets kit\src\log.h" />
-    <ClInclude Include="..\..\sockets kit\src\modules\echo.h" />
-    <ClInclude Include="..\..\sockets kit\src\port.h" />
-    <ClInclude Include="..\..\sockets kit\src\server.h" />
-    <ClInclude Include="..\..\sockets kit\src\sockets.h" />
-    <ClInclude Include="..\..\sockets kit\src\version.h" />
+    <ClInclude Include="..\..\sockets-kit\src\console.h" />
+    <ClInclude Include="..\..\sockets-kit\src\log.h" />
+    <ClInclude Include="..\..\sockets-kit\src\modules\echo.h" />
+    <ClInclude Include="..\..\sockets-kit\src\port.h" />
+    <ClInclude Include="..\..\sockets-kit\src\server.h" />
+    <ClInclude Include="..\..\sockets-kit\src\sockets.h" />
+    <ClInclude Include="..\..\sockets-kit\src\version.h" />
+    <ClInclude Include="server-console.resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\sockets kit\src\console.cpp" />
-    <ClCompile Include="..\..\sockets kit\src\log.cpp" />
-    <ClCompile Include="..\..\sockets kit\src\modules\echo.cpp" />
-    <ClCompile Include="..\..\sockets kit\src\port.cpp" />
-    <ClCompile Include="..\..\sockets kit\src\server.cpp" />
-    <ClCompile Include="..\..\sockets kit\src\sockets.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\console.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\modules\echo.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\port.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\server.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\sockets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="server-console.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="log-file.vcxproj">
+      <Project>{9e9d3833-12f7-46ef-bbf4-0e93cb9f11cf}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BA1CAA07-7A83-4368-9522-A564A4E12891}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>serverconsole</RootNamespace>
     <ProjectName>server-console</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -72,16 +84,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\spanglee\Documents\Visual Studio 2013\Projects\projects\sockets kit\sockets kit\src\modules</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\spanglee\Documents\Visual Studio 2013\Projects\projects\sockets-kit\sockets-kit\src\modules</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy debug\client.exe "..\..\sockets kit\bin"
-copy debug\server-console.exe "..\..\sockets kit\bin"</Command>
+      <Command>copy debug\server-console.exe "..\..\sockets-kit\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,18 +104,17 @@ copy debug\server-console.exe "..\..\sockets kit\bin"</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\spanglee\Documents\Visual Studio 2013\Projects\projects\sockets kit\sockets kit\src\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\spanglee\Documents\Visual Studio 2013\Projects\projects\sockets-kit\sockets-kit\src\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy release\client.exe "..\..\sockets kit\bin"
-copy release\server-console.exe "..\..\sockets kit\bin"</Command>
+      <Command>copy release\server-console.exe "..\..\sockets-kit\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

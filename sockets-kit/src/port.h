@@ -1,21 +1,17 @@
 //
 //  @(#)port.h
 //
-//  sockets kit - portable functions namespace
-//  ------------------------------------------
+//  sockets kit - portable functions
+//  --------------------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
-#ifndef __PORTABLE_H
-#define __PORTABLE_H
+#ifndef __PORT_H
+#define __PORT_H
 
 #include <time.h>
 
-//
-//  Portable functions namespace.
-//
-namespace Portable 
-{
+namespace Portable {
     int StringFormat(char *, size_t, const char *, ...);
     int Time(time_t *);
     int LocalTime(time_t *, struct tm *);
@@ -23,4 +19,4 @@ namespace Portable
     int FormatTime(char *, size_t, const char *, struct tm *);
 };
 
-#endif // __PORTABLE_H
+#endif // __PORT_H

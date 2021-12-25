@@ -1,60 +1,39 @@
 //
 //  @(#)server.cpp
 //
-//  sockets kit - server class
-//  --------------------------
+//  sockets kit - server
+//  ---------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
+#include <stdexcept>
 #include <string>
 #include "log.h"
 #include "server.h"
 #include "sockets.h"
 #include "modules/echo.h"
 
-//
-//  Local function prototypes.
-//
+SocketsInterface Server:: *sockets;
+LogFile Server:: *server_log;
+
 void *ThreadRoutine(void *);
 
-//
-//  Sockets interface.
-//
-SocketsInterface Server::*sockets;
-
-//
-//  Server log.
-//
-Log Server::*server_log;
-
-//
-//  Class constructor for server.
-//
-Server::Server(const int port, const int pending_connections, const std::string& log_file_path, const bool trace_mode)
-{
+Server::Server(const int port, const int pending_connections, const std::string &log_file_path, const bool trace_mode) {
     this->port = port;
     this->pending_connections = pending_connections;
     this->log_file_path = log_file_path;
     this->trace_mode = trace_mode;
 
     sockets = new SocketsInterface();
-    server_log = new Log(log_file_path);
+    server_log = new LogFile(log_file_path);
 }
 
-//
-//  Class destructor for server.
-//
-Server::~Server(void)
-{
+Server::~Server(void) {
     sockets->~SocketsInterface();
-    server_log->~Log();
+    server_log->~LogFile();
 }
 
-//
-//  Serve requests with a maximum number of threads.
-//
-void Server::ServerRequests(void)
-{
+void Server::ServerRequests(void) {
     SOCKET server_socket = sockets->CreateSocket();
 
     if (trace_mode) {
@@ -72,7 +51,7 @@ void Server::ServerRequests(void)
     server_socket = sockets->ListenConnections(server_socket, pending_connections);
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket listening to connections using server socket " + std::to_string(server_socket) + " and pending connections (backlog) " + std::to_string(pending_connections));
+        std::string trace_message = std::string("server socket listening to connections using server socket " + std::to_string(server_socket) + " and pending connections backlog length " + std::to_string(pending_connections));
         server_log->WriteTraceLog(trace_message);
     }
 
@@ -86,7 +65,7 @@ void Server::ServerRequests(void)
 
         struct ThreadArguments *thread_arguments = (struct ThreadArguments *)malloc(sizeof(struct ThreadArguments));
         if (!thread_arguments) {
-            throw (std::runtime_error(std::string("insufficient memory for allocating thread argument structure")));
+            throw (std::runtime_error(std::string("insufficient memory for allocating thread arguments structure")));
         }
 
         thread_arguments->ta_sockets = sockets;
@@ -111,11 +90,7 @@ void Server::ServerRequests(void)
     }
 }
 
-//
-//  Thread routine.
-//
-void *ThreadRoutine(void *thread_arguments)
-{
+void *ThreadRoutine(void *thread_arguments) {
     if (thread_arguments) {
         EchoService::HandleRequest(((THREAD_ARGUMENTS *)thread_arguments));
     }

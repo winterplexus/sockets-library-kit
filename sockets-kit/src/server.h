@@ -1,10 +1,10 @@
 //
 //  @(#)server.h
 //
-//  sockets kit - server class
-//  --------------------------
+//  sockets kit - server
+//  --------------------
 //
-//  copyright 2014-2017 Code Construct Systems (CCS)
+//  copyright 2014-2020 Code Construct Systems (CCS)
 //
 #ifndef __SERVER_H
 #define __SERVER_H
@@ -13,22 +13,16 @@
 #include "log.h"
 #include "sockets.h"
 
-//
-//  Thread arguments structure and type.
-//
 typedef struct ThreadArguments {
         SocketsInterface *ta_sockets;
         SOCKET ta_client_socket;
-        Log *ta_server_log;
+        LogFile *ta_server_log;
         bool ta_server_log_trace_mode;
 } THREAD_ARGUMENTS;
 
-//
-//  Server class.
-//
 class Server {
 public:
-        Server(const int, const int, const std::string&, const bool);
+        Server(const int, const int, const std::string &, const bool);
        ~Server(void);
         void ServerRequests(void);
 
@@ -38,7 +32,7 @@ private:
         std::string log_file_path;
         bool trace_mode;
         SocketsInterface *sockets;
-        Log *server_log;
+        LogFile *server_log;
 };
 
 #endif // __SERVER_H
