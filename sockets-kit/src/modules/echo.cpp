@@ -9,8 +9,7 @@
 #include <string>
 #include "echo.h"
 
-namespace EchoService {        
-
+namespace EchoService {       
     void EchoService::HandleRequest(THREAD_ARGUMENTS *arguments) {
         char buffer[EchoBufferSize];
         int size;

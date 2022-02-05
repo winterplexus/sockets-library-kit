@@ -4,7 +4,7 @@
 //  sockets kit - server
 //  ---------------------
 //
-//  copyright 2014-2020 Code Construct Systems (CCS)
+//  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #include <stdexcept>
 #include <string>
@@ -18,8 +18,8 @@ LogFile Server:: *server_log;
 
 void *ThreadRoutine(void *);
 
-Server::Server(const int port, const int pending_connections, const std::string &log_file_path, const bool trace_mode) {
-    this->port = port;
+Server::Server(const int port_number, const int pending_connections, const std::string &log_file_path, const bool trace_mode) {
+    this->port_number = port_number;
     this->pending_connections = pending_connections;
     this->log_file_path = log_file_path;
     this->trace_mode = trace_mode;
@@ -41,10 +41,10 @@ void Server::ServerRequests(void) {
         server_log->WriteTraceLog(trace_message);
     }
 
-    server_socket = sockets->BindSocket(server_socket, port);
+    server_socket = sockets->BindSocket(server_socket, port_number);
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket bound to local address using server socket " + std::to_string(server_socket) + " and port number " + std::to_string(port));
+        std::string trace_message = std::string("server socket bound to local address using server socket " + std::to_string(server_socket) + " and port number " + std::to_string(port_number));
         server_log->WriteTraceLog(trace_message);
     }
 
@@ -63,7 +63,7 @@ void Server::ServerRequests(void) {
             server_log->WriteTraceLog(trace_message);
         }
 
-        struct ThreadArguments *thread_arguments = (struct ThreadArguments *)malloc(sizeof(struct ThreadArguments));
+        struct ThreadArguments *thread_arguments = new ThreadArguments;
         if (!thread_arguments) {
             throw (std::runtime_error(std::string("insufficient memory for allocating thread arguments structure")));
         }
@@ -78,7 +78,7 @@ void Server::ServerRequests(void) {
             server_log->WriteTraceLog(trace_message);
         }
 
-        DWORD thread_id;
+        DWORD thread_id = (DWORD)0;
         if (CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadRoutine, thread_arguments, 0, (LPDWORD)&thread_id) == NULL) {
             throw (std::runtime_error(std::string("CreateThread() failed")));
         }

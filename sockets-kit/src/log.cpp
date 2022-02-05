@@ -4,7 +4,7 @@
 //  sockets kit - log file
 //  ----------------------
 //
-//  copyright 2014-2020 Code Construct Systems (CCS)
+//  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #define WIN32_LEAN_AND_MEAN
 
@@ -17,22 +17,34 @@
 #include "log.h"
 #include "port.h"
 
-static std::string log_file_name;
-static std::string log_date_time_format;
-
 CRITICAL_SECTION log_critical_section;
-
-LogFile::LogFile(void) {
-    InitializeCriticalSection(&log_critical_section);
-
-    log_file_name = std::string("log");
-}
 
 LogFile::LogFile(const std::string &file_name) {
     InitializeCriticalSection(&log_critical_section);
 
-    log_file_name = file_name;
-    log_date_time_format = std::string("%Y-%m-%d %H:%M:%S");
+    if (!file_name.empty()) {
+        log_file_name = file_name;
+    }
+    else {
+        log_file_name = std::string("log-file");
+    }
+}
+
+LogFile::LogFile(const std::string &file_name, const std::string &date_time_format) {
+    InitializeCriticalSection(&log_critical_section);
+
+    if (!file_name.empty()) {
+        log_file_name = file_name;
+    }
+    else {
+        log_file_name = std::string("log-file");
+    }
+    if (!date_time_format.empty()) {
+        log_date_time_format = date_time_format;
+    }
+    else {
+        log_date_time_format = std::string(date_time_format);
+    }
 }
 
 LogFile::LogFile(LogFile const &log) {
@@ -108,6 +120,24 @@ void LogFile::WriteEntryToLogFile(const std::string &entry) {
     LeaveCriticalSection(&log_critical_section);
 }
 
+void LogFile::WriteRuntimeErrorToLogFile(const std::string &runtime_error) {
+    EnterCriticalSection(&log_critical_section);
+
+    std::string log_fname = std::string(std::string(log_file_name) + std::string(".") + GetSystemDate() + ".log");
+    std::ofstream log_file(log_fname.c_str(), std::ios::app);
+
+    if (!log_file.is_open()) {
+        LeaveCriticalSection(&log_critical_section);
+        return;
+    }
+
+    log_file << std::string("0000-00-00 00:00:00 *FATAL: " + runtime_error + "\n");
+    log_file.flush();
+    log_file.close();
+
+    LeaveCriticalSection(&log_critical_section);
+}
+
 std::string LogFile::GetSystemDate() {
     time_t rawtime;
     struct tm tms;
@@ -142,22 +172,4 @@ std::string LogFile::GetSystemDateTime() {
 
     std::string system_date(buffer);
     return (system_date);
-}
-
-void LogFile::WriteRuntimeErrorToLogFile(const std::string &runtime_error) {
-    EnterCriticalSection(&log_critical_section);
-
-    std::string log_fname = std::string(std::string(log_file_name) + std::string(".") + GetSystemDate() + ".log");
-    std::ofstream log_file(log_fname.c_str(), std::ios::app);
-
-    if (!log_file.is_open()) {
-        LeaveCriticalSection(&log_critical_section);
-        return;
-    }
-
-    log_file << std::string("0000-00-00 00:00:00 *FATAL: " + runtime_error + "\n");
-    log_file.flush();
-    log_file.close();
-
-    LeaveCriticalSection(&log_critical_section);
 }

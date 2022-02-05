@@ -4,10 +4,12 @@
 //  sockets kit - server
 //  --------------------
 //
-//  copyright 2014-2020 Code Construct Systems (CCS)
+//  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #ifndef __SERVER_H
 #define __SERVER_H
+
+#define WIN32_LEAN_AND_MEAN
 
 #include <string>
 #include "log.h"
@@ -25,9 +27,8 @@ public:
         Server(const int, const int, const std::string &, const bool);
        ~Server(void);
         void ServerRequests(void);
-
 private:
-        int port;
+        int port_number;
         int pending_connections;
         std::string log_file_path;
         bool trace_mode;

@@ -10,3 +10,5 @@ The kit includes the following components:
 * TCP/IP server that receives and returns messages sent by a client.
 
 * Thread-safe log file (which is used by the TCP/IP server to trace socket activity and error conditions).
+
+Sockets library and it's deployment is dependent on Windows operating system.

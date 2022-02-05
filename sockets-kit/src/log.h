@@ -4,7 +4,7 @@
 //  sockets kit - log file
 //  ----------------------
 //
-//  copyright 2014-2020 Code Construct Systems (CCS)
+//  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #ifndef __LOG_H
 #define __LOG_H
@@ -14,16 +14,10 @@
 #include <windows.h>
 #include <string>
 
-#ifdef  LOG_FILE_DLL_EXPORTS
-#define LOG_FILE_API __declspec(dllexport)
-#else
-#define LOG_FILE_API __declspec(dllimport)
-#endif
-
-class LOG_FILE_API LogFile {
+class LogFile {
 public:
-        LogFile(void);
-        LogFile(const std::string &file_name);
+        LogFile(const std::string &);
+        LogFile(const std::string &, const std::string &);
         LogFile(LogFile const &);
        ~LogFile(void);
         void SetFileName(const std::string &);
@@ -34,12 +28,14 @@ public:
         void WriteWarningLog(const std::string &);
         void WriteErrorLog(const std::string &);
         void WriteFatalLog(const std::string &);
-
+private:
+        std::string log_file_name = std::string("log-file");
+        std::string log_date_time_format = std::string("%Y-%m-%d %H:%M:%S");
 private:
         void WriteEntryToLogFile(const std::string &);
+        void WriteRuntimeErrorToLogFile(const std::string &);
         std::string GetSystemDate();
         std::string GetSystemDateTime();
-        void WriteRuntimeErrorToLogFile(const std::string &);
 };
 
 #endif // __LOG_H
