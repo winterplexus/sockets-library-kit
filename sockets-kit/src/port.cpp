@@ -14,13 +14,13 @@
 #include "port.h"
 
 namespace Portable {
-    size_t Portable::Time(time_t *timer) {
+    size_t Time(time_t *timer) {
         time(timer);
 
         return (EXIT_SUCCESS);
     }
 
-    size_t Portable::LocalTime(time_t *timer, struct tm *time) {
+    size_t LocalTime(time_t *timer, struct tm *time) {
 #ifdef _SCL // secure C library
         return (localtime_s(time, timer));
 #else
@@ -40,11 +40,11 @@ namespace Portable {
 #endif
     }
 
-    size_t Portable::FormatTime(char *destination, size_t destination_size, const char *format, struct tm *time) {
+    size_t FormatTime(char *destination, size_t destination_size, const char *format, struct tm *time) {
         return (strftime(destination, destination_size, format, time));
     }
 
-    size_t Portable::StringCopy(char *destination, size_t destination_size, const char *source, size_t count) {
+    size_t StringCopy(char *destination, size_t destination_size, const char *source, size_t count) {
 #ifdef _SCL // secure C library
         return (strncpy_s(destination, destination_size, source, count));
 #else
@@ -52,7 +52,7 @@ namespace Portable {
 #endif
     }
 
-    size_t Portable::StringConcatenate(char *destination, size_t destination_size, const char *source, size_t count) {
+    size_t StringConcatenate(char *destination, size_t destination_size, const char *source, size_t count) {
 #ifdef _SCL // secure C library
         return (strncat_s(destination, destination_size, source, count));
 #else
@@ -60,7 +60,7 @@ namespace Portable {
 #endif
     }
 
-    size_t Portable::StringFormat(char *destination, size_t destination_size, const char *format, ...) {
+    size_t StringFormat(char *destination, size_t destination_size, const char *format, ...) {
         va_list varg;
         int rc;
 

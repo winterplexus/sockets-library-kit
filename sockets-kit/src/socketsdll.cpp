@@ -7,7 +7,6 @@
 //  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #define WIN32_LEAN_AND_MEAN
-
 #include <windows.h>
 
 BOOL APIENTRY DllMain(HMODULE library_base_address, DWORD reason_code, LPVOID reserved) {

@@ -14,6 +14,7 @@
 
 int main(int argc, char **argv) {
     ConsoleApplication application;
+
     if (application.ProcessOptions(argc, argv)) {
         application.ProcessServerRequests();
     }
@@ -68,7 +69,7 @@ bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
     }
 
     if (port_number < 1) {
-        DisplayMissingOption("port number");
+        DisplayMissingOptionMessage("port number");
         return (false);
     }
 
@@ -76,13 +77,16 @@ bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
 }
 
 void ConsoleApplication::ProcessServerRequests(void) {
+    Server *server = new Server(port_number, pending_connections, log_file_path, trace_mode);
+
     try {
-        Server server = Server(port_number, pending_connections, log_file_path, trace_mode);
-        server.ServerRequests();
+        server->ServerRequests();
     }
     catch (std::exception &e) {
         DisplayErrorMessage(std::string(e.what()));
     }
+
+    delete server;
 }
 
 void ConsoleApplication::DisplayOptionsUsage(void) {
@@ -90,7 +94,7 @@ void ConsoleApplication::DisplayOptionsUsage(void) {
     std::cout << "where (options) include:" << std::endl << std::endl;
     std::cout << "-b  [pending connections backlog length]" << std::endl;
     std::cout << "-l  [log file path]" << std::endl;
-    std::cout << "-p  [port number]" << std::endl;
+    std::cout << "-p  [port IP number]" << std::endl;
     std::cout << "-v  display version" << std::endl;
     std::cout << "-x  enable trace mode" << std::endl;
 }
@@ -103,7 +107,7 @@ void ConsoleApplication::DisplayInvalidOptionArgumentMessage(const std::string &
     std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
-void ConsoleApplication::DisplayMissingOption(const std::string &message) {
+void ConsoleApplication::DisplayMissingOptionMessage(const std::string &message) {
     std::cout << std::endl << "error-> " << message << " option is missing" << std::endl;
 }
 

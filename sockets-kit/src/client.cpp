@@ -14,6 +14,7 @@
 
 int main(int argc, char **argv) {
     ClientApplication application;
+
     if (application.ProcessOptions(argc, argv)) {
         application.ProcessClientRequest();
     }
@@ -63,11 +64,11 @@ bool ClientApplication::ProcessOptions(int argc, char **argv) {
     }
 
     if (host_address.size() < 1) {
-        DisplayMissingOption("host address");
+        DisplayMissingOptionMessage("host address");
         return (false);
     }
     if (!port_number) {
-        DisplayMissingOption("port number");
+        DisplayMissingOptionMessage("port number");
         return (false);
     }
 
@@ -76,14 +77,14 @@ bool ClientApplication::ProcessOptions(int argc, char **argv) {
 
 void ClientApplication::ProcessClientRequest(void) {
     char *buffer;
-    int buffer_size = (int)data.size();
+    int buffer_size = (int)data.size() + 1;
 
-    if ((buffer = new char[buffer_size + 1]) == NULL) {
+    if ((buffer = new char[buffer_size]) == NULL) {
         DisplayErrorMessage(std::string("insufficient memory to allocating client request buffer"));
         return;
     }
 
-    memset(buffer, 0, buffer_size + 1);
+    memset(buffer, 0, buffer_size);
 
     SocketsInterface *sockets = new SocketsInterface();
 
@@ -106,7 +107,7 @@ void ClientApplication::ProcessClientRequest(void) {
             total_bytes_received += bytes_received;
 
             std::cout << std::string(buffer);
-            memset(buffer, 0, buffer_size + 1);
+            memset(buffer, 0, buffer_size);
         }
 
         sockets->CloseSocket(client_socket);
@@ -127,8 +128,8 @@ void ClientApplication::DisplayOptionsUsage(void) {
     std::cout << "usage: client.exe (options)" << std::endl << std::endl;
     std::cout << "where (options) include:" << std::endl << std::endl;
     std::cout << "-d  [data]" << std::endl;
-    std::cout << "-h  [host address]" << std::endl;
-    std::cout << "-p  [port number]" << std::endl;
+    std::cout << "-h  [host IP address]" << std::endl;
+    std::cout << "-p  [port IP number]" << std::endl;
     std::cout << "-v  display version" << std::endl;
 }
 
@@ -140,7 +141,7 @@ void ClientApplication::DisplayInvalidOptionArgumentMessage(const std::string &a
     std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
-void ClientApplication::DisplayMissingOption(const std::string &message) {
+void ClientApplication::DisplayMissingOptionMessage(const std::string &message) {
     std::cout << std::endl << "error-> " << message << " option is missing" << std::endl;
 }
 

@@ -26,7 +26,7 @@ private:
         void DisplayOptionsUsage(void);
         void DisplayInvalidOptionMessage(const std::string &);
         void DisplayInvalidOptionArgumentMessage(const std::string &);
-        void DisplayMissingOption(const std::string &);
+        void DisplayMissingOptionMessage(const std::string &);
         void DisplayErrorMessage(const std::string &);
         void DisplayVersion(void);
 };

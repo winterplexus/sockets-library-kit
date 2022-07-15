@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\sockets-kit\src\sockets.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="sockets.resource.h" />
   </ItemGroup>
   <ItemGroup>

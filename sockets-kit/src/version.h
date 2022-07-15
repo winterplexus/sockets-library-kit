@@ -12,6 +12,6 @@
 #include <string>
 
 const std::string VersionProduct = "sockets kit";
-const std::string VersionRelease = "sockets kit v2.1.0 release 1";
+const std::string VersionRelease = "sockets kit v3.0.0 release 1";
 
 #endif // __VERSION_H

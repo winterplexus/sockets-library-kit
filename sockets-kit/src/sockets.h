@@ -10,7 +10,6 @@
 #define __SOCKETS_H
 
 #define WIN32_LEAN_AND_MEAN
-
 #include <winsock.h>
 
 #ifdef  _SOCKETS_INTERFACE_DLL_EXPORTS

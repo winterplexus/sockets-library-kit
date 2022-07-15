@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\sockets-kit\src\log.cpp">
+    <ClCompile Include="..\..\sockets-kit\src\logfile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\sockets-kit\src\port.cpp">
@@ -23,13 +23,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\sockets-kit\src\log.h">
+    <ClInclude Include="..\..\sockets-kit\src\logfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\sockets-kit\src\port.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="log-file.resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sockets-kit\src\logmutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

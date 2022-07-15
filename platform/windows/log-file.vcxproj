@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\sockets-kit\src\log.cpp" />
+    <ClCompile Include="..\..\sockets-kit\src\logfile.cpp" />
     <ClCompile Include="..\..\sockets-kit\src\port.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\sockets-kit\src\log.h" />
+    <ClInclude Include="..\..\sockets-kit\src\logfile.h" />
+    <ClInclude Include="..\..\sockets-kit\src\logmutex.h" />
     <ClInclude Include="..\..\sockets-kit\src\port.h" />
     <ClInclude Include="log-file.resource.h" />
   </ItemGroup>
@@ -92,11 +93,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\log-file\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\log-file\</IntDir>
+    <TargetName>logfile</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\log-file\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\log-file\</IntDir>
+    <TargetName>logfile</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,7 +139,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;_SCL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_SCL;_WINDOWS_ENVIRONMENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -147,8 +150,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy x64\Debug\log-file\log-file.lib ..\..\sockets-kit\lib
-copy ..\..\sockets-kit\src\log.h ..\..\sockets-kit\inc</Command>
+      <Command>copy x64\Debug\log-file\logfile.lib ..\..\sockets-kit\lib
+copy ..\..\sockets-kit\src\logfile.h ..\..\sockets-kit\inc</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,7 +160,7 @@ copy ..\..\sockets-kit\src\log.h ..\..\sockets-kit\inc</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;_SCL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;_SCL;_WINDOWS_ENVIRONMENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -170,8 +173,8 @@ copy ..\..\sockets-kit\src\log.h ..\..\sockets-kit\inc</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy x64\Release\log-file\log-file.lib ..\..\sockets-kit\lib
-copy ..\..\sockets-kit\src\log.h ..\..\sockets-kit\inc</Command>
+      <Command>copy x64\Release\log-file\logfile.lib ..\..\sockets-kit\lib
+copy ..\..\sockets-kit\src\logfile.h ..\..\sockets-kit\inc</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

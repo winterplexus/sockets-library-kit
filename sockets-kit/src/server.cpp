@@ -8,7 +8,7 @@
 //
 #include <stdexcept>
 #include <string>
-#include "log.h"
+#include "logfile.h"
 #include "server.h"
 #include "sockets.h"
 #include "modules/echo.h"
@@ -44,7 +44,7 @@ void Server::ServerRequests(void) {
     server_socket = sockets->BindSocket(server_socket, port_number);
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket bound to local address using server socket " + std::to_string(server_socket) + " and port number " + std::to_string(port_number));
+        std::string trace_message = std::string("server socket bound to local IP address using server socket " + std::to_string(server_socket) + " and port IP number " + std::to_string(port_number));
         server_log->WriteTraceLog(trace_message);
     }
 

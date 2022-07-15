@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\sockets-kit\inc\logfile.h" />
     <ClInclude Include="..\..\sockets-kit\src\console.h" />
-    <ClInclude Include="..\..\sockets-kit\src\log.h" />
     <ClInclude Include="..\..\sockets-kit\src\modules\echo.h" />
     <ClInclude Include="..\..\sockets-kit\src\server.h" />
     <ClInclude Include="..\..\sockets-kit\src\sockets.h" />

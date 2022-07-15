@@ -9,10 +9,8 @@
 #ifndef __SERVER_H
 #define __SERVER_H
 
-#define WIN32_LEAN_AND_MEAN
-
 #include <string>
-#include "log.h"
+#include "logfile.h"
 #include "sockets.h"
 
 typedef struct ThreadArguments {

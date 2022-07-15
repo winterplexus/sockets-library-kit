@@ -1,15 +1,15 @@
 //
-// @(#)echo.cpp
+//  @(#)echo.cpp
 //
-// sockets kit - echo service
-// --------------------------
+//  sockets kit - echo service
+//  --------------------------
 //
-// copyright 2014-2020 Code Construct Systems (CCS)
+//  copyright 2014-2022 Code Construct Systems (CCS)
 //
 #include <string>
 #include "echo.h"
 
-namespace EchoService {       
+namespace EchoService {
     void EchoService::HandleRequest(THREAD_ARGUMENTS *arguments) {
         char buffer[EchoBufferSize];
         int size;
@@ -20,7 +20,7 @@ namespace EchoService {
         }
 
         if (arguments->ta_server_log_trace_mode) {
-            std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with size " + std::to_string(size);
+            std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with byte size " + std::to_string(size);
             arguments->ta_server_log->WriteTraceLog(trace_message);
         }
 
@@ -40,7 +40,7 @@ namespace EchoService {
             }
 
             if (arguments->ta_server_log_trace_mode) {
-                std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with size " + std::to_string(size);
+                std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with byte size " + std::to_string(size);
                 arguments->ta_server_log->WriteTraceLog(trace_message);
             }
         }

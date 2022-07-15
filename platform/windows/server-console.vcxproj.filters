@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\sockets-kit\src\log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\sockets-kit\src\server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -34,6 +31,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="server-console.resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sockets-kit\inc\logfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
