@@ -4,7 +4,7 @@
 //  sockets kit - sockets interface
 //  -------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __SOCKETS_H
 #define __SOCKETS_H

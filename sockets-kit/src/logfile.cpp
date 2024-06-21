@@ -1,17 +1,17 @@
 //
 //  @(#)logfile.cpp
 //
-//  sockets kit - log file
-//  ----------------------
+//  sockets kit - log file class
+//  ----------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <errno.h>
 #include <time.h>
-#include <windows.h>
 #include "logfile.h"
 #include "logmutex.h"
 #include "port.h"
@@ -65,12 +65,6 @@ void LogFile::SetDateTimeFormat(const std::string &date_time_format) {
     log_date_time_format = std::string(date_time_format);
 }
 
-void LogFile::WriteTraceLog(const std::string &trace_message) {
-    std::string entry = std::string(GetSystemDateTime() + " *TRACE: " + trace_message + "\n");
-
-    WriteEntryToLogFile(entry);
-}
-
 void LogFile::WriteDebugLog(const std::string &debug_message) {
     std::string entry = std::string(GetSystemDateTime() + " *DEBUG: " + debug_message + "\n");
 
@@ -91,12 +85,6 @@ void LogFile::WriteWarningLog(const std::string &warning_message) {
 
 void LogFile::WriteErrorLog(const std::string &error_message) {
     std::string entry = std::string(GetSystemDateTime() + " *ERROR: " + error_message + "\n");
-
-    WriteEntryToLogFile(entry);
-}
-
-void LogFile::WriteFatalLog(const std::string &fatal_message) {
-    std::string entry = std::string(GetSystemDateTime() + " *FATAL: " + fatal_message + "\n");
 
     WriteEntryToLogFile(entry);
 }

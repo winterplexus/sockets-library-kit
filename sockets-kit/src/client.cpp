@@ -4,7 +4,7 @@
 //  sockets kit - client application class
 //  --------------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>
@@ -58,6 +58,10 @@ bool ClientApplication::ProcessOptions(int argc, char **argv) {
         else if (strcmp(argv[i], "-v") == 0) {
             DisplayVersion();
         }
+        else if (strcmp(argv[i], "-?") == 0) {
+            DisplayOptionsUsage();
+            return (false);
+        }
         else {
             DisplayInvalidOptionMessage(std::string(argv[i]));
         }
@@ -92,7 +96,7 @@ void ClientApplication::ProcessClientRequest(void) {
         SOCKET client_socket = sockets->CreateSocket();
 
         sockets->ConnectServer(client_socket, host_address.c_str(), port_number);
-        std::cout << "connecting to " << host_address << " at port number " << port_number << std::endl;
+        std::cout << "connecting to: " << host_address << " at port number: " << port_number << std::endl;
 
         size_t bytes_sent = sockets->SendRequest(client_socket, data.c_str(), (int)data.size());
         std::cout << data << std::endl;

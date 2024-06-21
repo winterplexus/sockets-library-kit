@@ -2,9 +2,9 @@
 //  @(#)logmutex.h
 //
 //  sockets kit - log file mutex operations
-//  ---------------------------------------
+//  ----------------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __LOGMUTEX_H
 #define __LOGMUTEX_H
