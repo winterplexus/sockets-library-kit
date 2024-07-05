@@ -4,7 +4,7 @@
 //  sockets kit - sockets interface
 //  -------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #define WIN32_LEAN_AND_MEAN
 
@@ -20,7 +20,7 @@ SocketsInterface::SocketsInterface(void) {
     }
 }
 
-SocketsInterface::SocketsInterface(int addres_family, int socket_type, int ip_protocol) {
+SocketsInterface::SocketsInterface(int address_family, int socket_type, int ip_protocol) {
     this->address_family = address_family;
     this->socket_type = socket_type;
     this->ip_protocol = ip_protocol;

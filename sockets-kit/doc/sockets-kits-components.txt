@@ -4,7 +4,7 @@
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
- v2.10
+ v4.00
 
  CLIENT APPLICATION
  ===============================================================================
@@ -22,14 +22,15 @@
  Server                         server.cpp               server.h
  EchoService                    modules/echo.cpp         modules/echo.h
  SocketsInterface               sockets.dll              sockets.h
- LogFile                        log-file.lib             log.h
+ LogFile                        logfile.lib              log.h
 
  LOG FILE LIBRARY (STATIC LIBRARY)
  ===============================================================================
 
  CLASS / NAMESPACE              SOURCE FILE NAME         INCLUDE FILE NAME
  ------------------------------ ------------------------ -----------------------
- LogFile                        log.cpp                  log.h
+ LogFile                        logfile.cpp              logfile.h
+ -                              logmutex.h               logmutex.h
  Portable                       port.cpp                 port.h
  
  SOCKETS DLL (DYNAMIC LINK LIBRARY)
@@ -40,3 +41,4 @@
  SocketsInterface               sockets.cpp              sockets.h
  Portable                       port.cpp                 port.h
  DllMain                        windows/socketsdll.cpp
+ 

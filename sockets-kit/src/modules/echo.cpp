@@ -4,7 +4,7 @@
 //  sockets kit - echo service
 //  --------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #include <string>
 #include "echo.h"
@@ -20,8 +20,8 @@ namespace EchoService {
         }
 
         if (arguments->ta_server_log_trace_mode) {
-            std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with byte size " + std::to_string(size);
-            arguments->ta_server_log->WriteTraceLog(trace_message);
+            std::string trace_message = "echo service-> received: '" + std::string(buffer, size) + "' from client with byte size: " + std::to_string(size);
+            arguments->ta_server_log->WriteDebugLog(trace_message);
         }
 
         while (size >= 1) {
@@ -31,8 +31,8 @@ namespace EchoService {
             }
 
             if (arguments->ta_server_log_trace_mode) {
-                std::string trace_message = "echo service-> sent '" + std::string(buffer, size) + "' to client";
-                arguments->ta_server_log->WriteTraceLog(trace_message);
+                std::string trace_message = "echo service-> sent: '" + std::string(buffer, size) + "' to client";
+                arguments->ta_server_log->WriteDebugLog(trace_message);
             }
 
             if ((size = arguments->ta_sockets->ReceiveResponse(arguments->ta_client_socket, buffer, EchoBufferSize)) < 0) {
@@ -40,8 +40,8 @@ namespace EchoService {
             }
 
             if (arguments->ta_server_log_trace_mode) {
-                std::string trace_message = "echo service-> received '" + std::string(buffer, size) + "' from client with byte size " + std::to_string(size);
-                arguments->ta_server_log->WriteTraceLog(trace_message);
+                std::string trace_message = "echo service-> received: '" + std::string(buffer, size) + "' from client with byte size: " + std::to_string(size);
+                arguments->ta_server_log->WriteDebugLog(trace_message);
             }
         }
 

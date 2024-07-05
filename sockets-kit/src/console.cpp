@@ -4,7 +4,7 @@
 //  sockets kit - console application              `
 //  ---------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>
@@ -63,6 +63,10 @@ bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
         else if (strcmp(argv[i], "-v") == 0) {
             DisplayVersion();
         }
+        else if (strcmp(argv[i], "-?") == 0) {
+            DisplayOptionsUsage();
+            return (false);
+        }
         else {
             DisplayInvalidOptionMessage(std::string(argv[i]));
         }
@@ -93,7 +97,7 @@ void ConsoleApplication::DisplayOptionsUsage(void) {
     std::cout << "usage: console-server.exe (options)" << std::endl << std::endl;
     std::cout << "where (options) include:" << std::endl << std::endl;
     std::cout << "-b  [pending connections backlog length]" << std::endl;
-    std::cout << "-l  [log file path]" << std::endl;
+    std::cout << "-l  [log file path name (excluding file extension)]" << std::endl;
     std::cout << "-p  [port IP number]" << std::endl;
     std::cout << "-v  display version" << std::endl;
     std::cout << "-x  enable trace mode" << std::endl;

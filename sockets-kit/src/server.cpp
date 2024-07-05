@@ -4,7 +4,7 @@
 //  sockets kit - server
 //  ---------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #include <stdexcept>
 #include <string>
@@ -37,30 +37,30 @@ void Server::ServerRequests(void) {
     SOCKET server_socket = sockets->CreateSocket();
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket created " + std::to_string(server_socket));
-        server_log->WriteTraceLog(trace_message);
+        std::string trace_message = std::string("server socket created: " + std::to_string(server_socket));
+        server_log->WriteDebugLog(trace_message);
     }
 
     server_socket = sockets->BindSocket(server_socket, port_number);
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket bound to local IP address using server socket " + std::to_string(server_socket) + " and port IP number " + std::to_string(port_number));
-        server_log->WriteTraceLog(trace_message);
+        std::string trace_message = std::string("server socket bound to local IP address using server socket: " + std::to_string(server_socket) + " and port IP number: " + std::to_string(port_number));
+        server_log->WriteDebugLog(trace_message);
     }
 
     server_socket = sockets->ListenConnections(server_socket, pending_connections);
 
     if (trace_mode) {
-        std::string trace_message = std::string("server socket listening to connections using server socket " + std::to_string(server_socket) + " and pending connections backlog length " + std::to_string(pending_connections));
-        server_log->WriteTraceLog(trace_message);
+        std::string trace_message = std::string("server socket listening to connections using server socket: " + std::to_string(server_socket) + " and pending connections backlog length: " + std::to_string(pending_connections));
+        server_log->WriteDebugLog(trace_message);
     }
 
     for (;;) {
         SOCKET client_socket = sockets->AcceptConnections(server_socket);
 
         if (trace_mode) {
-            std::string trace_message = std::string("accepted connection from client " + std::to_string(client_socket));
-            server_log->WriteTraceLog(trace_message);
+            std::string trace_message = std::string("accepted connection from client: " + std::to_string(client_socket));
+            server_log->WriteDebugLog(trace_message);
         }
 
         struct ThreadArguments *thread_arguments = new ThreadArguments;
@@ -74,8 +74,8 @@ void Server::ServerRequests(void) {
         thread_arguments->ta_server_log_trace_mode = trace_mode;
 
         if (trace_mode) {
-            std::string trace_message = std::string("thread arguments structure created for server socket " + std::to_string(server_socket));
-            server_log->WriteTraceLog(trace_message);
+            std::string trace_message = std::string("thread arguments structure created for server socket: " + std::to_string(server_socket));
+            server_log->WriteDebugLog(trace_message);
         }
 
         DWORD thread_id = (DWORD)0;
@@ -84,8 +84,8 @@ void Server::ServerRequests(void) {
         }
 
         if (trace_mode) {
-            std::string trace_message = std::string("thread created (TID) " + std::to_string(thread_id));
-            server_log->WriteTraceLog(trace_message);
+            std::string trace_message = std::string("thread created (TID): " + std::to_string(thread_id));
+            server_log->WriteDebugLog(trace_message);
         }
     }
 }

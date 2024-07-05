@@ -4,7 +4,7 @@
 //  sockets kit - client application class
 //  --------------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __CLIENT_H
 #define __CLIENT_H

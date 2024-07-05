@@ -4,7 +4,7 @@
 //  sockets kit - console application
 //  ---------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __CONSOLE_H
 #define __CONSOLE_H

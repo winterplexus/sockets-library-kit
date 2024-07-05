@@ -4,7 +4,7 @@
 //  sockets kit - portable functions
 //  --------------------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __PORT_H
 #define __PORT_H

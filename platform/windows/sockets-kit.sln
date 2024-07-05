@@ -13,6 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sockets", "sockets.vcxproj"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{E79FC06A-7290-41E1-BB95-E7602D9E1D07}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\sockets-kit\doc\sockets-kits-components.txt = ..\..\sockets-kit\doc\sockets-kits-components.txt
 		..\..\sockets-kit\doc\windows-sockets-2.pdf = ..\..\sockets-kit\doc\windows-sockets-2.pdf
 	EndProjectSection
 EndProject

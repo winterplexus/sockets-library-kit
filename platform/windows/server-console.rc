@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,0,0,0
- PRODUCTVERSION 3,0,0,0
+ FILEVERSION 4,0,0,0
+ PRODUCTVERSION 4,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -69,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Code Construct Systems (CCS)"
             VALUE "FileDescription", "socket kit server (console) application"
-            VALUE "FileVersion", "3.0.0.0"
+            VALUE "FileVersion", "4.0.0.0"
             VALUE "InternalName", "server-console.exe"
-            VALUE "LegalCopyright", "Copyright (C) 2014-2022 Code Construct Systems (CCS)"
+            VALUE "LegalCopyright", "Copyright (C) 2014-2024 Code Construct Systems (CCS)"
             VALUE "OriginalFilename", "server-console.exe"
             VALUE "ProductName", "sockets-kit"
-            VALUE "ProductVersion", "3.0.0.0"
+            VALUE "ProductVersion", "4.0.0.0"
         END
     END
     BLOCK "VarFileInfo"

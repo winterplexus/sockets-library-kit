@@ -4,7 +4,7 @@
 //  sockets kit - server
 //  --------------------
 //
-//  copyright 2014-2022 Code Construct Systems (CCS)
+//  copyright 2014-2024 Code Construct Systems (CCS)
 //
 #ifndef __SERVER_H
 #define __SERVER_H
