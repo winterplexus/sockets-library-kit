@@ -4,7 +4,7 @@
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
- v4.00
+ v5.00
 
  CLIENT APPLICATION
  ===============================================================================
@@ -18,7 +18,7 @@
 
  CLASS / NAMESPACE              SOURCE FILE NAME         INCLUDE FILE NAME
  ------------------------------ ------------------------ -----------------------
- ConsoleApplication             console.cpp              console.h
+ ConsoleServerApplication             console.cpp              console.h
  Server                         server.cpp               server.h
  EchoService                    modules/echo.cpp         modules/echo.h
  SocketsInterface               sockets.dll              sockets.h

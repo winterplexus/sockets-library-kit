@@ -4,7 +4,7 @@
 //  sockets kit - sockets DLL entry point
 //  -------------------------------------
 //
-//  copyright 2014-2024 Code Construct Systems (CCS)
+//  copyright 2014-2025 Code Construct Systems (CCS)
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

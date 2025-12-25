@@ -4,7 +4,7 @@
 //  sockets kit - server
 //  ---------------------
 //
-//  copyright 2014-2024 Code Construct Systems (CCS)
+//  copyright 2014-2025 Code Construct Systems (CCS)
 //
 #include <stdexcept>
 #include <string>

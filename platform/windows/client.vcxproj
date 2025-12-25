@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\sockets-kit\src\client.h" />
+    <ClInclude Include="..\..\sockets-kit\src\sockets.h" />
     <ClInclude Include="..\..\sockets-kit\src\version.h" />
     <ClInclude Include="client.resource.h" />
   </ItemGroup>

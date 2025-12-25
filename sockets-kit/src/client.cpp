@@ -4,7 +4,7 @@
 //  sockets kit - client application class
 //  --------------------------------------
 //
-//  copyright 2014-2024 Code Construct Systems (CCS)
+//  copyright 2014-2025 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>
@@ -130,27 +130,27 @@ void ClientApplication::ProcessClientRequest(void) {
 
 void ClientApplication::DisplayOptionsUsage(void) {
     std::cout << "usage: client.exe (options)" << std::endl << std::endl;
-    std::cout << "where (options) include:" << std::endl << std::endl;
-    std::cout << "-d  [data]" << std::endl;
-    std::cout << "-h  [host IP address]" << std::endl;
-    std::cout << "-p  [port IP number]" << std::endl;
-    std::cout << "-v  display version" << std::endl;
+    std::cout << "options: -d <data>" << std::endl;
+    std::cout << "         -h <host IP address>" << std::endl;
+    std::cout << "         -p <port IP number>" << std::endl;
+    std::cout << "         -v print version" << std::endl;
+    std::cout << "         -? print this usage" << std::endl;
 }
 
 void ClientApplication::DisplayInvalidOptionMessage(const std::string &option) {
-    std::cout << std::endl << "error-> invalid option: " << option << std::endl;
+    std::cerr << std::endl << "error-> invalid option: " << option << std::endl;
 }
 
 void ClientApplication::DisplayInvalidOptionArgumentMessage(const std::string &argument) {
-    std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
+    std::cerr << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
 void ClientApplication::DisplayMissingOptionMessage(const std::string &message) {
-    std::cout << std::endl << "error-> " << message << " option is missing" << std::endl;
+    std::cerr << std::endl << "error-> " << message << " option is missing" << std::endl;
 }
 
 void ClientApplication::DisplayErrorMessage(const std::string &message) {
-    std::cout << "error-> " << message << std::endl;
+    std::cerr << "error-> " << message << std::endl;
 }
 
 void ClientApplication::DisplayVersion(void) {

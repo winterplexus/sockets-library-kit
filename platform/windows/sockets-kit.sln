@@ -11,8 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "log-file", "log-file.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sockets", "sockets.vcxproj", "{7171423C-8A14-4FDB-A45C-BCAF8C3E5800}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{E79FC06A-7290-41E1-BB95-E7602D9E1D07}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\README.md = ..\..\README.md
 		..\..\sockets-kit\doc\sockets-kits-components.txt = ..\..\sockets-kit\doc\sockets-kits-components.txt
 		..\..\sockets-kit\doc\windows-sockets-2.pdf = ..\..\sockets-kit\doc\windows-sockets-2.pdf
 	EndProjectSection

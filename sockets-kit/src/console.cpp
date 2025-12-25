@@ -4,7 +4,7 @@
 //  sockets kit - console application              `
 //  ---------------------------------
 //
-//  copyright 2014-2024 Code Construct Systems (CCS)
+//  copyright 2014-2025 Code Construct Systems (CCS)
 //
 #include <iostream>
 #include <string>
@@ -13,7 +13,7 @@
 #include "version.h"
 
 int main(int argc, char **argv) {
-    ConsoleApplication application;
+    ConsoleServerApplication application;
 
     if (application.ProcessOptions(argc, argv)) {
         application.ProcessServerRequests();
@@ -21,13 +21,13 @@ int main(int argc, char **argv) {
     return (0);
 }
 
-ConsoleApplication::ConsoleApplication() {
+ConsoleServerApplication::ConsoleServerApplication() {
     port_number = 0;
     pending_connections = DefaultPendingConnectionsLimit;
     trace_mode = false;
 }
 
-bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
+bool ConsoleServerApplication::ProcessOptions(int argc, char **argv) {
     int i;
 
     if (argc == 1) {
@@ -80,7 +80,7 @@ bool ConsoleApplication::ProcessOptions(int argc, char **argv) {
     return (true);
 }
 
-void ConsoleApplication::ProcessServerRequests(void) {
+void ConsoleServerApplication::ProcessServerRequests(void) {
     Server *server = new Server(port_number, pending_connections, log_file_path, trace_mode);
 
     try {
@@ -93,32 +93,32 @@ void ConsoleApplication::ProcessServerRequests(void) {
     delete server;
 }
 
-void ConsoleApplication::DisplayOptionsUsage(void) {
-    std::cout << "usage: console-server.exe (options)" << std::endl << std::endl;
-    std::cout << "where (options) include:" << std::endl << std::endl;
-    std::cout << "-b  [pending connections backlog length]" << std::endl;
-    std::cout << "-l  [log file path name (excluding file extension)]" << std::endl;
-    std::cout << "-p  [port IP number]" << std::endl;
-    std::cout << "-v  display version" << std::endl;
-    std::cout << "-x  enable trace mode" << std::endl;
+void ConsoleServerApplication::DisplayOptionsUsage(void) {
+    std::cout << "usage: console-server (options)" << std::endl << std::endl;
+    std::cout << "options: -b <pending connections backlog length>" << std::endl;
+    std::cout << "         -l <log file path name (excluding file extension)>" << std::endl;
+    std::cout << "         -p <port IP number>" << std::endl;
+    std::cout << "         -v display version" << std::endl;
+    std::cout << "         -x enable trace mode" << std::endl;
+    std::cout << "         -? print this usage" << std::endl;
 }
 
-void ConsoleApplication::DisplayInvalidOptionMessage(const std::string &option) {
-    std::cout << std::endl << "error-> invalid option: " << option << std::endl;
+void ConsoleServerApplication::DisplayInvalidOptionMessage(const std::string &option) {
+    std::cerr << std::endl << "error-> invalid option: " << option << std::endl;
 }
 
-void ConsoleApplication::DisplayInvalidOptionArgumentMessage(const std::string &argument) {
-    std::cout << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
+void ConsoleServerApplication::DisplayInvalidOptionArgumentMessage(const std::string &argument) {
+    std::cerr << std::endl << "error-> missing option value or invalid option argument: " << argument << std::endl;
 }
 
-void ConsoleApplication::DisplayMissingOptionMessage(const std::string &message) {
-    std::cout << std::endl << "error-> " << message << " option is missing" << std::endl;
+void ConsoleServerApplication::DisplayMissingOptionMessage(const std::string &message) {
+    std::cerr << std::endl << "error-> " << message << " option is missing" << std::endl;
 }
 
-void ConsoleApplication::DisplayErrorMessage(const std::string &message) {
-    std::cout << "error-> " << message << std::endl;
+void ConsoleServerApplication::DisplayErrorMessage(const std::string &message) {
+    std::cerr << "error-> " << message << std::endl;
 }
 
-void ConsoleApplication::DisplayVersion(void) {
+void ConsoleServerApplication::DisplayVersion(void) {
     std::cout << VersionRelease << std::endl;
 }

@@ -22,10 +22,13 @@
     <ClInclude Include="..\..\sockets-kit\src\client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="client.resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\sockets-kit\src\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="client.resource.h">
+    <ClInclude Include="..\..\sockets-kit\src\sockets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

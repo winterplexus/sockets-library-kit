@@ -4,7 +4,7 @@
 //  sockets kit - log file class
 //  ----------------------------
 //
-//  copyright 2014-2024 Code Construct Systems (CCS)
+//  copyright 2014-2025 Code Construct Systems (CCS)
 //
 #include <cstring>
 #include <fstream>
